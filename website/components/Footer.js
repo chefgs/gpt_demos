@@ -4,10 +4,12 @@ const Footer = () => {
             <p>&copy; 2024 CloudEngine Labs. All rights reserved.</p>
             <style jsx>{`
                 footer {
-                    background: #005b96;
-                    text-align: center;
-                    padding: 10px;
-                    color: #ffffff;
+                    background: var(--background-header);
+                    color: var(--text-header);
+                    padding: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
                 }
             `}</style>
         </footer>

@@ -1,12 +1,15 @@
 import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
 
 const Header = () => {
     return (
         <header>
             <div className="logo">
-                <img src="/images/logo.png" alt="CloudEngine Labs Logo" />
-                <h1>CloudEngine Labs</h1>
-                <p>Cloud Engineering Redefined</p>
+                <img src="/images/logo-only.png" alt="CloudEngine Labs Logo" />
+                <div>
+                    <h1>CloudEngine Labs</h1>
+                    <p>Cloud Engineering Redefined</p>
+                </div>
             </div>
             <nav>
                 <ul>
@@ -16,10 +19,11 @@ const Header = () => {
                     <li><Link href="/blogs">Blogs</Link></li>
                 </ul>
             </nav>
+            <ThemeToggle />
             <style jsx>{`
                 header {
-                    background: #005b96;
-                    color: #ffffff;
+                    background: var(--background-header);
+                    color: var(--text-header);
                     padding: 20px;
                     display: flex;
                     justify-content: space-between;
@@ -39,7 +43,7 @@ const Header = () => {
                 .logo h1 {
                     margin: 0;
                     font-weight: 600;
-                    color: #ffffff;
+                    color: var(--text-header);
                 }
 
                 nav ul {
@@ -55,7 +59,7 @@ const Header = () => {
 
                 nav ul li a {
                     text-decoration: none;
-                    color: #ffffff;
+                    color: var(--text-header);
                     font-weight: 600;
                 }
             `}</style>

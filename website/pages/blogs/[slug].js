@@ -7,7 +7,7 @@ import Layout from '../../components/Layout';
 import SEO from '../../components/SEO';
 
 export default function BlogPost({ content, frontmatter }) {
-    const { title, description, date, image } = frontmatter;
+    const { title = '', description, date, image } = frontmatter;
     const url = `https://yourdomain.com/blogs/${title.replace(/ /g, '-')}`;
 
     return (

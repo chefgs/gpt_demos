@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
 :root {
-    --background-body: #f7f7f7;
+    --background-body: #9d9b9b;
     --text-body: #333333;
     --background-header: #005b96;
     --text-header: #ffffff;
@@ -93,6 +93,7 @@ footer {
 
 main {
     padding: 20px;
+    color: var(--text-body);
 }
 
 form {

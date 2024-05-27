@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "latest",
+    "gray-matter": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "gray-matter": "latest",
+    "react-markdown": "^9.0.1",
     "remark": "latest",
-    "remark-html": "latest",
-    "@fortawesome/fontawesome-free": "latest"
+    "remark-html": "latest"
   }
 }

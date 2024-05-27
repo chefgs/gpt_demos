@@ -16,8 +16,8 @@ export default function handler(req, res) {
         });
         res.status(200).json(posts);
     } else if (req.method === 'POST') {
-        const { filename, content } = req.body;
-        const filePath = path.join(postsDirectory, `${filename}.md`);
+        const { title, content } = req.body;
+        const filePath = path.join(postsDirectory, `${title}.md`);
         fs.writeFileSync(filePath, content, 'utf8');
         res.status(201).json({ message: 'Blog post created' });
     } else {

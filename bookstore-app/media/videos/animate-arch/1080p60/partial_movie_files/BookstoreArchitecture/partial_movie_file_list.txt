@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/3977891868_2222345864_223132457.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_1784412779_3049424296.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_2858561291_3747876194.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_1492260533_2319106468.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_3637387343_2399301337.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_2514982806_3178319056.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_2767880236_3446416883.mp4'
+file 'file:/Users/gsaravanan/Documents/github/gpt_demos/bookstore-app/media/videos/animate-arch/1080p60/partial_movie_files/BookstoreArchitecture/2852726489_1141282389_2816871155.mp4'

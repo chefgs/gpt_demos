@@ -2,7 +2,7 @@ from diagrams import Diagram, Cluster, Edge
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
 from diagrams.aws.network import ELB, Route53
-from diagrams.aws.devtools import Codepipeline, Codebuild
+# from diagrams.aws.devtools import Codepipeline, Codebuild
 from diagrams.aws.general import Client
 from diagrams.onprem.network import Internet
 # from diagrams.onprem.container import Docker
@@ -11,20 +11,22 @@ from diagrams.onprem.monitoring import Prometheus, Grafana
 from diagrams.programming.framework import React
 from diagrams.custom import Custom
 
-with Diagram("Bookstore Application Architecture", show=False, graph_attr={ 'nodesep': '0.5', 'ranksep': '1.0'}):
-    client = Client("User")
-    internet = Internet("Internet")
-    dns = Route53("DNS")
+graph_attr={'ranksep': '1.0', 'rankdir': 'TB'}
+
+with Diagram("Bookstore Application Architecture", show=False, graph_attr={'ranksep': '1.0'}):
+    with Cluster("User Network"):
+        client = Client("User")
+        internet = Internet("Internet")
 
     with Cluster("CI/CD Pipeline"):
         with Cluster("Source Code"):
             react = React("React")
             terraform = Custom("Terraform", "./tf.png")
         github_actions = Custom("GitHub Actions", "./ghactions.png")
-        pipeline = Custom("GitHub Actions CICD", "./ghactions.png")
 
-    with Cluster("AWS Cloud", graph_attr={ 'nodesep': '0.5', 'ranksep': '1.0'}):
+    with Cluster("AWS Cloud", graph_attr={'ranksep': '1.0'}):
         lb = ELB("Load Balancer")
+        dns = Route53("DNS")
 
         with Cluster("Backend Service"):
             backend = EC2("Backend (Node.js)")
@@ -40,7 +42,6 @@ with Diagram("Bookstore Application Architecture", show=False, graph_attr={ 'nod
     client >> internet >> dns >> lb
     react >> github_actions  
     terraform >> github_actions 
-    github_actions >> pipeline 
     # build >> lb
     lb >> Edge(label="HTTP/HTTPS") >> frontend
     lb >> Edge(label="HTTP/HTTPS") >> backend
@@ -48,3 +49,10 @@ with Diagram("Bookstore Application Architecture", show=False, graph_attr={ 'nod
     backend >> prometheus
     frontend >> prometheus
     prometheus >> grafana
+
+    # Connecting CI/CD Pipeline to AWS Cloud
+    github_actions >> Edge(color="blue", style="dashed", label="Deploy to AWS Cloud") >> dns
+    # github_actions >> Edge(color="blue", style="dashed", label="Deploy to Backend") >> backend
+    # github_actions >> Edge(color="blue", style="dashed", label="Deploy to frontend") >> frontend
+    
+    # pipeline >> Edge(color="blue", style="dashed", label="Deploy to Frontend") >> frontend

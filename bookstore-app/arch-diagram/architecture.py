@@ -17,10 +17,11 @@ with Diagram("Bookstore Application Architecture", show=False, graph_attr={ 'nod
     dns = Route53("DNS")
 
     with Cluster("CI/CD Pipeline"):
-        github = React("GitHub")
+        with Cluster("Source Code"):
+            react = React("React")
+            terraform = Custom("Terraform", "./tf.png")
         github_actions = Custom("GitHub Actions", "./ghactions.png")
-        pipeline = Codepipeline("CodePipeline")
-        build = Codebuild("CodeBuild")
+        pipeline = Custom("GitHub Actions CICD", "./ghactions.png")
 
     with Cluster("AWS Cloud", graph_attr={ 'nodesep': '0.5', 'ranksep': '1.0'}):
         lb = ELB("Load Balancer")
@@ -37,8 +38,10 @@ with Diagram("Bookstore Application Architecture", show=False, graph_attr={ 'nod
             grafana = Grafana("Grafana")
 
     client >> internet >> dns >> lb
-    github >> pipeline >> build
-    build >> lb
+    react >> github_actions  
+    terraform >> github_actions 
+    github_actions >> pipeline 
+    # build >> lb
     lb >> Edge(label="HTTP/HTTPS") >> frontend
     lb >> Edge(label="HTTP/HTTPS") >> backend
     backend >> Edge(label="Database Connection") >> db

@@ -301,3 +301,10 @@ Dynamic Environments: Automatically generate diagrams for dynamic environments w
 ## Conclusion
 
 You've now successfully created an architecture diagram as code for a 2-tier bookstore application. This method allows for easy updates, version control, and integration into CI/CD pipelines, making it an efficient tool for modern software development practices.
+
+## Docs Reference
+[Python Diagrams](https://diagrams.mingrammer.com/)
+
+[Installation](https://diagrams.mingrammer.com/docs/getting-started/installation)
+
+[Examples](https://diagrams.mingrammer.com/docs/getting-started/examples)

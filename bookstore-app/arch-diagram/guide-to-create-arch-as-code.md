@@ -219,6 +219,37 @@ with Diagram("Bookstore Application Architecture", show=False):
 
 The Python script leverages the `diagrams` library to create a structured, version-controlled architecture diagram. It groups related components into clusters, defines the interactions between them using directed edges, and ensures the entire infrastructure is visually represented in a clear, consistent manner. This approach makes it easy to update and maintain the architecture diagram as the application evolves.
 
+### Adding custom node for user-defined components
+
+Let us see how to create a custom node in Python using the `diagrams` library. This library allowing developers to visually represent their infrastructure and systems.
+
+The purpose of creating a custom node is to represent a user-defined architecture component and ICON/logo. 
+
+Method 1: Defining the `from diagrams.custom import Custom` Diagrams Custom module, and use this section along with the valid logo/ICON PNG image of the architecture component.
+For example, we have added Terraform Icon using this method.
+
+We need to store the licence free PNG image for this purpose.
+```
+from diagrams.custom import Custom
+
+terraform = Custom("Terraform", "./tf.png")
+```
+
+Method 2:
+As depicted on the _commented out_ example, there is custom node definition for subnet has been added.
+
+A subnet is part of VPC architecture &, is a logical subdivision of an IP network. The ability to create custom nodes is particularly useful when the predefined classes provided by the `diagrams` library do not cover all the components you need to represent in your architecture diagrams.
+
+- The code snippet begins by importing the `Node` class from the `diagrams` library.
+- This `Node` class is the base class for all diagram nodes, and custom nodes can be created by subclassing it. 
+- The subclass shown in the example is named `Subnet`, indicating its intended use to represent subnetworks.
+
+Within the `Subnet` class, two class attributes are defined:
+- `_icon_dir`: This attribute specifies the directory path where custom icons are stored. In this example, it's set to `"path/to/custom/icons"`, which should be replaced with the actual path to the directory containing the icon files.
+- `_icon`: This attribute specifies the filename of the icon image that will be used to visually represent the node in the diagram. Here, it is set to `"subnet.png"`, indicating that an image file named `subnet.png` in the specified directory will be used as the icon for the subnet node.
+
+By defining these attributes, the `Subnet` class tells the `diagrams` library where to find the custom icon and which icon to use when rendering the subnet node in a diagram. This allows for a more customized and visually accurate representation of the system's architecture.
+
 ## Step 3: Generating the Diagram
 
 Ensure the Python script ([`architecture.py`] is saved in your project directory.

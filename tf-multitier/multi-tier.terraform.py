@@ -1,5 +1,5 @@
 import os
-import zipfile
+# import zipfile
 
 # Directory structure
 directories = [
@@ -428,8 +428,8 @@ for file_path, content in files.items():
         file.write(content)
 
 # Create a zip file
-zip_filename = "multi-tier-app.zip"
-with zipfile.ZipFile(zip_filename, 'w') as zipf:
-    for root, _, files in os.walk("multi-tier-app"):
-        for file in files:
-            zipf.write(os.path.join(root, file))
+# zip_filename = "multi-tier-app.zip"
+# with zipfile.ZipFile(zip_filename, 'w') as zipf:
+#     for root, _, files in os.walk("multi-tier-app"):
+#         for file in files:
+#             zipf.write(os.path.join(root, file))

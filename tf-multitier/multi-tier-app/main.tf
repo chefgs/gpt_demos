@@ -1,9 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "var.gs-multi-tier-infra"
     key            = "multi-tier-app/terraform.tfstate"
-    region         = "us-west-2"
-    dynamodb_table = "gs-terraform-lock-table"
   }
 }
 

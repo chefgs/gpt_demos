@@ -15,5 +15,4 @@ resource "aws_autoscaling_group" "app_asg" {
   min_size             = var.min_size
   vpc_zone_identifier  = var.subnet_ids
   launch_configuration = aws_launch_configuration.app_lc.id
-  tags = var.tags
 }

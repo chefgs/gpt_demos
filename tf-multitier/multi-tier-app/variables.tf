@@ -16,10 +16,13 @@ variable "private_subnet_cidrs" {
 
 variable "ami_id" {
   description = "The AMI ID for the EC2 instances"
+  default = "ami-0c55b159cbfafe1f0"
 }
 
 variable "instance_type" {
   description = "The instance type for the EC2 instances"
+  default = "t2.micro"
+
 }
 
 variable "desired_capacity" {
@@ -39,34 +42,42 @@ variable "min_size" {
 
 variable "db_identifier" {
   description = "The identifier for the RDS instance"
+  default = "multi-tier-app-db"
 }
 
 variable "allocated_storage" {
   description = "The allocated storage for the RDS instance"
+  default = 20
 }
 
 variable "engine" {
   description = "The database engine for the RDS instance"
+  default = "postgresql"
 }
 
 variable "engine_version" {
   description = "The engine version for the RDS instance"
+  default = "11.5"
 }
 
 variable "instance_class" {
   description = "The instance class for the RDS instance"
+  default = "db.t2.micro"
 }
 
 variable "db_name" {
   description = "The database name for the RDS instance"
+  default = "multi-tier-app-db"
 }
 
 variable "username" {
   description = "The master username for the RDS instance"
+  default = "admin"
 }
 
 variable "password" {
   description = "The master password for the RDS instance"
+  default = "password"
 }
 
 variable "s3-bucket-name" {

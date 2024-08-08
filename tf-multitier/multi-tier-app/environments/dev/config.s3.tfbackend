@@ -1,0 +1,3 @@
+bucket         = "gs-multi-tier-infra"
+region         = "us-west-2"
+dynamodb_table = "gs-terraform-lock-table"

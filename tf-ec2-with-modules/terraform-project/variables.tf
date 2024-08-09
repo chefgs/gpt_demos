@@ -1,0 +1,1 @@
+# Define any global variables if needed

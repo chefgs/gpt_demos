@@ -8,7 +8,7 @@ from diagrams.aws.compute import EC2, EKS
 from diagrams.aws.network import VPC, PublicSubnet as Subnet, Nacl as SecurityGroup
 from diagrams.onprem.iac import Terraform
 
-with Diagram("Platform Automation View", show=True, direction="LR"):
+with Diagram("CICD Pipeline", show=False, direction="LR"):
     bitbucket = Github("Bit Bucket")
     
     with Cluster("EKS"):

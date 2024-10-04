@@ -8,7 +8,6 @@ const Header = () => {
                 <img src="https://github.com/chefgs/gpt_demos/tree/main/images/logo-only.png" alt="The Great Technology Company Logo" />
                 <div>
                     <h1>The Great Technology Company</h1>
-                    <p>Cloud Engineering Redefined</p>
                 </div>
             </div>
             <nav>
@@ -36,6 +35,7 @@ const Header = () => {
                 }
 
                 .logo img {
+                    src: 
                     width: 50px;
                     margin-right: 10px;
                 }

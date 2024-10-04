@@ -1,7 +1,7 @@
 const Footer = () => {
     return (
         <footer>
-            <p>&copy; 2024 CloudEngine Labs. All rights reserved.</p>
+            <p>&copy; 2024 The Great Technology Company. All rights reserved.</p>
             <style jsx>{`
                 footer {
                     background: var(--background-header);

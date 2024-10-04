@@ -5,9 +5,9 @@ const Header = () => {
     return (
         <header>
             <div className="logo">
-                <img src="https://github.com/chefgs/gpt_demos/tree/main/images/logo-only.png" alt="CloudEngine Labs Logo" />
+                <img src="https://github.com/chefgs/gpt_demos/tree/main/images/logo-only.png" alt="The Great Technology Company Logo" />
                 <div>
-                    <h1>CloudEngine Labs</h1>
+                    <h1>The Great Technology Company</h1>
                     <p>Cloud Engineering Redefined</p>
                 </div>
             </div>

@@ -5,8 +5,8 @@ export default function Offerings() {
     return (
         <Layout>
             <SEO
-                title="Our Offerings - CloudEngine Labs"
-                description="Explore the offerings of CloudEngine Labs in cloud and DevOps automation."
+                title="Our Offerings - The Great Technology Company"
+                description="Explore the offerings of The Great Technology Company in cloud and DevOps automation."
                 keywords="Offerings, Cloud, DevOps, Automation"
                 image="/images/logo.png"
                 url="https://yourdomain.com/offerings"

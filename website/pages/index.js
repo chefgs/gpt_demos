@@ -6,8 +6,8 @@ export default function Home() {
     return (
         <Layout>
             <SEO
-                title="CloudEngine Labs - Cloud Engineering Redefined"
-                description="Amplify Your Cloud & DevOps Automation Journey with CloudEngine Labs"
+                title="The Great Technology Company - Cloud Engineering Redefined"
+                description="Amplify Your Cloud & DevOps Automation Journey with The Great Technology Company"
                 keywords="Cloud, DevOps, Automation, Engineering"
                 image="/images/logo.png"
                 url="https://yourdomain.com"
@@ -17,7 +17,7 @@ export default function Home() {
                     <h1>Amplify Your Cloud & DevOps Automation Journey</h1>
                     <button>Contact Us</button>
                 </div>
-                <p>CloudEngine Labs Private Limited based out in the city of Chennai, India...</p>
+                <p>The Great Technology Company Private Limited based out in the city of Chennai, India...</p>
                 <img className={styles.myImageClass} src="/images/various-icons.png" alt="Icons representing various DevOps tools including GitHub, Terraform, and Kubernetes" />
             </div>
         </Layout>

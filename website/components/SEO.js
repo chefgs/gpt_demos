@@ -8,11 +8,11 @@ const SEO = ({ title, description, keywords, image, url }) => {
         "image": image,
         "author": {
             "@type": "Organization",
-            "name": "CloudEngine Labs"
+            "name": "The Great Technology Company"
         },
         "publisher": {
             "@type": "Organization",
-            "name": "CloudEngine Labs",
+            "name": "The Great Technology Company",
             "logo": {
                 "@type": "ImageObject",
                 "url": "/images/logo.png"

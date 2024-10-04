@@ -5,8 +5,8 @@ export default function Contact() {
     return (
         <Layout>
             <SEO
-                title="Contact CloudEngine Labs"
-                description="Get in touch with CloudEngine Labs for all your cloud engineering needs."
+                title="Contact The Great Technology Company"
+                description="Get in touch with The Great Technology Company for all your cloud engineering needs."
                 keywords="Contact, Cloud, DevOps, Automation"
                 image="/images/logo.png"
                 url="https://yourdomain.com/contact"

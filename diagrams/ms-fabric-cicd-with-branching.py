@@ -11,13 +11,13 @@ from diagrams.onprem.client import Users
 from diagrams.azure.devops import Pipelines
 
 # Creating a diagram using Python's diagrams library to illustrate the CI/CD process for Microsoft Fabric.
-with Diagram("MS-Fabric CI-CD Process with Separate Pipelines", show=False, direction="LR"):
+with Diagram("Microsoft Fabric CI-CD Process Automation with Pipelines", show=False, direction="LR"):
     # User Personas
     developers = Users("Developers")
     devops_engineers = Users("DevOps Engineers")
 
     # Version Control Cluster
-    with Cluster("Azure Repos"):
+    with Cluster("Azure Repos - PR Approval and Promotion", graph_attr={"fontsize": "18"}):
         feature_branch = Repos("Feature Branch")
         dev_branch = Repos("Dev Branch")
         stage_branch = Repos("Stage Branch")
@@ -28,58 +28,60 @@ with Diagram("MS-Fabric CI-CD Process with Separate Pipelines", show=False, dire
     # with Cluster("PR Review Process"):
         pr_review = Repos("PR Review & Approval")
         developers >> feature_branch >> pr_review >> dev_branch
-        dev_branch >> Edge(label="Approved & Merged") >> stage_branch
-        stage_branch >> Edge(label="Approved & Merged") >> main_branch
+        dev_branch >> Edge(label="Approved & Promote") >> stage_branch
+        stage_branch >> Edge(label="Approved & Promote") >> main_branch
 
     # CI Pipeline Cluster
-    with Cluster("CI Pipeline"):
+    with Cluster("CI Pipeline - Templatized", graph_attr={"bgcolor": "lightblue", "fontsize": "18", "fontweight": "bold"}):
         ci_pipeline = Pipelines("CI Build Pipeline")
         validation = Artifacts("Validation Tests")
         dev_branch >> ci_pipeline >> validation
+        stage_branch >> ci_pipeline >> validation
+        main_branch >> ci_pipeline >> validation
 
     # Infrastructure as Code Pipeline Cluster
-    with Cluster("Infrastructure Pipeline"):
+    with Cluster("Infrastructure Pipeline - Templatized", graph_attr={"fontsize": "18"}):
         infra_repo = Repos("Terraform IaC Code")
         infra_pipeline = Pipelines("Infrastructure Pipeline")
         infra_automation = Terraform("Terraform")
         devops_engineers >> infra_repo >> infra_pipeline >> infra_automation
 
     # Deployment Pipeline Cluster
-    with Cluster("Deployment Pipeline"):
+    with Cluster("CD Pipeline - Templatized", graph_attr={"bgcolor": "lightblue", "fontsize": "18", "fontweight": "bold"}):
         deploy_pipeline = Pipelines("Deployment Pipeline")
         deploy_artifacts = Artifacts("Deploy Artifacts")
         validation >> Edge(label="Trigger") >> deploy_pipeline >> deploy_artifacts
 
     # Deployment Stages for Different Environments
-    with Cluster("Deployment Stages"):
+    with Cluster("Deployment Stages", graph_attr={"fontsize": "18"}):
         
         # Dev Environment
-        with Cluster("Dev Environment"):
-            dev_workspace = Resourcegroups("Dev Workspace")
-            dev_data_lake = DataLake("Azure Data Lake")
-            dev_data_factory = DataFactories("Azure Data Factory")
-            dev_synapse = SynapseAnalytics("Azure Synapse")
-            dev_sql_db = SQLDatabases("Azure SQL Database")
-            dev_key_vault = KeyVaults("Azure Key Vault")
+        with Cluster("Dev/Stage/Prod Environment", graph_attr={"fontsize": "18"}):
+            workspace = Resourcegroups("Environment Workspace")
+            data_lake = DataLake("Azure Data Lake")
+            data_factory = DataFactories("Azure Data Factory")
+            synapse = SynapseAnalytics("Azure Synapse")
+            sql_db = SQLDatabases("Azure SQL Database")
+            key_vault = KeyVaults("Azure Key Vault")
             # dev_app_services = AppServices("Azure App Services")
             # dev_api_services = AppServices("Azure API Services")
-            dev_power_bi = Custom("Power BI", "./logo_resources/power_bi.png")
+            power_bi = Custom("Power BI", "./logo_resources/power_bi.png")
             
-            infra_automation >> dev_workspace
-            dev_workspace >> [dev_data_lake, dev_data_factory, dev_synapse, dev_sql_db, dev_power_bi]
+            infra_automation >> workspace
+            workspace >> [data_lake, data_factory, synapse, sql_db, power_bi]
             # dev_sql_db >> dev_app_services >> dev_api_services >> dev_power_bi
             # dev_workspace >> dev_key_vault
-            deploy_artifacts >> dev_workspace
+            deploy_artifacts >> workspace
 
                 # Data Factory to Synapse flow
-    dev_data_factory >> dev_synapse
-    dev_data_factory >> dev_data_lake
+    data_factory >> synapse
+    data_factory >> data_lake
 
     # Data Lake connection to Synapse
-    dev_data_lake >> dev_synapse
+    data_lake >> synapse
 
     # Synapse to SQL Database
-    dev_synapse >> dev_sql_db >> dev_power_bi
+    synapse >> sql_db >> power_bi
 
 
         # Stage Environment

@@ -1,6 +1,8 @@
 const express = require('express');
-const Quiz = require('../models/quizModel');
+// const Quiz = require('../models/quizModel');
 const router = express.Router();
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient()
 
 router.post('/add', async (req, res) => {
   try {
@@ -13,15 +15,17 @@ router.post('/add', async (req, res) => {
       return res.status(400).json({ message: 'Correct answer must be one of the provided answers' });
     }
 
-    const newQuiz = new Quiz({
-      question,
-      answers,
-      correctAnswer,
-      category,
-      difficulty,
+    const newQuiz = await prisma.quiz.create({
+      data: {
+        question,
+        answers,
+        correctAnswer,
+        category,
+        difficulty,
+      },
     });
 
-    await newQuiz.save();
+    // await newQuiz.save();
     res.status(201).json({ message: 'Quiz question added successfully' });
   } catch (error) {
     console.error(error);
@@ -32,7 +36,7 @@ router.post('/add', async (req, res) => {
 // Route to get all quiz questions
 router.get('/questions', async (req, res) => {
   try {
-    const questions = await Quiz.find();
+    const questions = await prisma.quiz.findMany();
     res.json(questions);
   } catch (error) {
     console.error(error);
@@ -44,7 +48,7 @@ router.get('/questions', async (req, res) => {
 router.post('/answer', async (req, res) => {
   try {
     const { questionId, selectedAnswer } = req.body;
-    const question = await Quiz.findById(questionId);
+    const question = await prisma.quiz.findUnique({ where: { id: questionId } });
 
     if (!question) {
       return res.status(404).json({ message: 'Question not found' });

@@ -1,0 +1,27 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+const quizRoutes = require('./routes/quizRoutes');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+const uri = process.env.MONGO_URI;
+if (!uri) {
+    throw new Error('MONGO_URI environment variable is not defined');
+}
+
+// MongoDB connection
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+app.use('/api/quiz', quizRoutes);
+
+const PORT = process.env.PORT || 6000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

@@ -26,7 +26,7 @@ router.post('/add', async (req, res) => {
     });
 
     // await newQuiz.save();
-    res.status(201).json({ message: 'Quiz question added successfully' });
+    res.status(201).json({ message: 'Quiz question added successfully', newQuiz });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

@@ -9,9 +9,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.MONGO_URI;
+const uri = process.env.DATABASE_URL;
 if (!uri) {
-    throw new Error('MONGO_URI environment variable is not defined');
+    throw new Error('DATABASE_URL environment variable is not defined');
 }
 
 // MongoDB connection

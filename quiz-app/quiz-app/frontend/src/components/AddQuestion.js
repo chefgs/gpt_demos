@@ -25,7 +25,7 @@ const AddQuestion = () => {
     };
 
     try {
-      await axios.post('http://localhost:5000/api/quiz/add', newQuestion);
+      await axios.post('http://localhost:6000/api/quiz/add', newQuestion);
       alert('Question added successfully');
     } catch (error) {
       alert('Failed to add question');

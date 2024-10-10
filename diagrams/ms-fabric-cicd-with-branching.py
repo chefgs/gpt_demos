@@ -35,7 +35,7 @@ with Diagram("Microsoft Fabric CI-CD Process Automation with Pipelines", show=Fa
     # CI Pipeline Cluster
     with Cluster("CI Pipeline - Templatized", graph_attr={"bgcolor": "lightblue", "fontsize": "18", "fontweight": "bold"}):
         ci_pipeline = Pipelines("CI Build Pipeline")
-        validation = Artifacts("Validation Tests")
+        validation = Artifacts("Create Artifacts")
         dev_branch >> ci_pipeline >> validation
         stage_branch >> ci_pipeline >> validation
         main_branch >> ci_pipeline >> validation

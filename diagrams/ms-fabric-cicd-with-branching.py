@@ -5,7 +5,8 @@ from diagrams.azure.compute import AppServices
 from diagrams.azure.database import SQLDatabases, DataLake
 from diagrams.azure.security import KeyVaults
 from diagrams.azure.analytics import SynapseAnalytics, DataFactories
-from diagrams.onprem.iac import Terraform
+# from diagrams.onprem.iac import Terraform
+from diagrams.azure.general import Templates as ARMTemplates
 from diagrams.custom import Custom
 from diagrams.onprem.client import Users
 from diagrams.azure.devops import Pipelines
@@ -41,9 +42,9 @@ with Diagram("Microsoft Fabric CI-CD Process Automation with Pipelines", show=Fa
 
     # Infrastructure as Code Pipeline Cluster
     with Cluster("Infrastructure Pipeline - Templatized", graph_attr={"fontsize": "18"}):
-        infra_repo = Repos("Terraform IaC Code")
+        infra_repo = Repos("ARM IaC Code")
         infra_pipeline = Pipelines("Infrastructure Pipeline")
-        infra_automation = Terraform("Terraform")
+        infra_automation = ARMTemplates("ARM Templates")
         devops_engineers >> infra_repo >> infra_pipeline >> infra_automation
 
     # Deployment Pipeline Cluster
@@ -57,31 +58,31 @@ with Diagram("Microsoft Fabric CI-CD Process Automation with Pipelines", show=Fa
         
         # Dev Environment
         with Cluster("Dev/Stage/Prod Environment", graph_attr={"fontsize": "18"}):
-            workspace = Resourcegroups("Environment Workspace")
-            data_lake = DataLake("Azure Data Lake")
-            data_factory = DataFactories("Azure Data Factory")
-            synapse = SynapseAnalytics("Azure Synapse")
-            sql_db = SQLDatabases("Azure SQL Database")
-            key_vault = KeyVaults("Azure Key Vault")
+            workspace = Resourcegroups("Fabric Workspace")
+            # data_lake = DataLake("Azure Data Lake")
+            # data_factory = DataFactories("Azure Data Factory")
+            # synapse = SynapseAnalytics("Azure Synapse")
+            # sql_db = SQLDatabases("Azure SQL Database")
+            # key_vault = KeyVaults("Azure Key Vault")
             # dev_app_services = AppServices("Azure App Services")
             # dev_api_services = AppServices("Azure API Services")
-            power_bi = Custom("Power BI", "./logo_resources/power_bi.png")
+            # power_bi = Custom("Power BI", "./logo_resources/power_bi.png")
             
             infra_automation >> workspace
-            workspace >> [data_lake, data_factory, synapse, sql_db, power_bi]
+            # workspace >> [data_lake, data_factory, synapse, sql_db, power_bi]
             # dev_sql_db >> dev_app_services >> dev_api_services >> dev_power_bi
             # dev_workspace >> dev_key_vault
             deploy_artifacts >> workspace
 
-                # Data Factory to Synapse flow
-    data_factory >> synapse
-    data_factory >> data_lake
+    # # Data Factory to Synapse flow
+    # data_factory >> synapse
+    # data_factory >> data_lake
 
-    # Data Lake connection to Synapse
-    data_lake >> synapse
+    # # Data Lake connection to Synapse
+    # data_lake >> synapse
 
-    # Synapse to SQL Database
-    synapse >> sql_db >> power_bi
+    # # Synapse to SQL Database
+    # synapse >> sql_db >> power_bi
 
 
         # Stage Environment

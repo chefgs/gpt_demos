@@ -1,0 +1,34 @@
+// AWS AI Chip Timeline
+digraph {
+	AWS_AI_Chips [label="AWS AI Chips" color=lightblue shape=ellipse style=filled]
+	2018 [label=2018 color=lightgrey shape=rectangle style=filled]
+	AWS_AI_Chips -> 2018
+	Inferentia [label=Inferentia color=white shape=box style=filled]
+	2018 -> Inferentia
+	Graviton [label=Graviton color=white shape=box style=filled]
+	2018 -> Graviton
+	2020 [label=2020 color=lightgrey shape=rectangle style=filled]
+	AWS_AI_Chips -> 2020
+	Trainium [label=Trainium color=white shape=box style=filled]
+	2020 -> Trainium
+	Graviton2 [label=Graviton2 color=white shape=box style=filled]
+	2020 -> Graviton2
+	2022 [label=2022 color=lightgrey shape=rectangle style=filled]
+	AWS_AI_Chips -> 2022
+	Inferentia2 [label=Inferentia2 color=white shape=box style=filled]
+	2022 -> Inferentia2
+	Graviton3 [label=Graviton3 color=white shape=box style=filled]
+	2022 -> Graviton3
+	2023 [label=2023 color=lightgrey shape=rectangle style=filled]
+	AWS_AI_Chips -> 2023
+	Trainium2 [label=Trainium2 color=white shape=box style=filled]
+	2023 -> Trainium2
+	2024 [label=2024 color=lightgrey shape=rectangle style=filled]
+	AWS_AI_Chips -> 2024
+	Inferentia3 [label=Inferentia3 color=white shape=box style=filled]
+	2024 -> Inferentia3
+	Trainium3 [label=Trainium3 color=white shape=box style=filled]
+	2024 -> Trainium3
+	Graviton4 [label=Graviton4 color=white shape=box style=filled]
+	2024 -> Graviton4
+}

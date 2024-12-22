@@ -18,6 +18,7 @@ with Diagram("AWS Account Setup and IAM RBAC", show=False, direction="LR"):
         root_mfa = IAMMfaToken("Root MFA Setup")
         admin_access = IAMPermissions("Admin Access Policy")
         user_access = IAMPermissions("User Access Policy")
+        password_policy = IAMPermissions("Password Policy")
 
     # Connections
     root_account >> root_mfa
@@ -25,3 +26,5 @@ with Diagram("AWS Account Setup and IAM RBAC", show=False, direction="LR"):
     control_tower >> [admin_role, user_role]
     admin_role >> admin_access
     user_role >> user_access
+    user_role >> password_policy
+    admin_role >> password_policy

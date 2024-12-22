@@ -62,12 +62,6 @@ export default function ChoosePill() {
 export default function RedPill() {
   const aspects = [
     { aspect: 'Automation Scope', value: 'End-to-end CI/CD pipelines covering all stages.' },
-    { aspect: 'Team Collaboration', value: 'Cross-functional DevOps culture with shared goals.' },
-    { aspect: 'Technical Documentation', value: 'Comprehensive, centralized, and version-controlled.' },
-    { aspect: 'Infrastructure', value: 'Automated provisioning with Infrastructure as Code.' },
-    { aspect: 'Monitoring', value: 'Proactive observability with predictive analytics.' },
-    { aspect: 'Deployment Frequency', value: 'Frequent and seamless automated deployments.' },
-    { aspect: 'Onboarding', value: 'Quick onboarding with well-documented processes.' },
   ];
 
   return (
@@ -99,12 +93,6 @@ export default function RedPill() {
 export default function BluePill() {
   const aspects = [
     { aspect: 'Automation Scope', value: 'Basic task automation (e.g., Jenkins jobs).' },
-    { aspect: 'Team Collaboration', value: 'Siloed teams, unclear responsibilities.' },
-    { aspect: 'Technical Documentation', value: 'Sparse or outdated, causing bottlenecks.' },
-    { aspect: 'Infrastructure', value: 'Manually provisioned or static setups.' },
-    { aspect: 'Monitoring', value: 'Reactive and limited.' },
-    { aspect: 'Deployment Frequency', value: 'Infrequent and error-prone.' },
-    { aspect: 'Onboarding', value: 'New hires struggle due to lack of clear guidance.' },
   ];
 
   return (

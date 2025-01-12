@@ -1,0 +1,125 @@
+import pygame
+import random
+
+# Initialize Pygame
+pygame.init()
+
+# Screen Dimensions
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 400
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Automation Runner")
+
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+
+# Fonts
+font = pygame.font.SysFont('Arial', 24)
+
+# Clock
+clock = pygame.time.Clock()
+FPS = 30
+
+# Player
+player_size = 50
+player_x = 100
+player_y = SCREEN_HEIGHT - player_size - 20
+player_y_velocity = 0
+gravity = 1
+jump_power = -15
+player = pygame.Rect(player_x, player_y, player_size, player_size)
+
+# Hurdles
+hurdle_width = 30
+hurdle_height = 50
+hurdles = []
+hurdle_speed = 10
+hurdle_spawn_rate = 1500  # in milliseconds
+last_hurdle_time = 0
+
+# Automation Tools (Points)
+tool_size = 30
+tools = []
+tool_speed = 10
+tool_spawn_rate = 2000  # in milliseconds
+last_tool_time = 0
+
+# Score
+score = 0
+
+# Game Loop
+running = True
+while running:
+    screen.fill(WHITE)
+
+    # Event Handling
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and player_y + player_size >= SCREEN_HEIGHT - 20:
+                player_y_velocity = jump_power
+
+    # Player Movement
+    player_y_velocity += gravity
+    player.y += player_y_velocity
+    if player.y + player_size > SCREEN_HEIGHT - 20:
+        player.y = SCREEN_HEIGHT - player_size - 20
+
+    # Hurdle Logic
+    current_time = pygame.time.get_ticks()
+    if current_time - last_hurdle_time > hurdle_spawn_rate:
+        hurdle_x = SCREEN_WIDTH
+        hurdle_y = SCREEN_HEIGHT - hurdle_height - 20
+        hurdles.append(pygame.Rect(hurdle_x, hurdle_y, hurdle_width, hurdle_height))
+        last_hurdle_time = current_time
+
+    for hurdle in hurdles[:]:
+        hurdle.x -= hurdle_speed
+        if hurdle.x + hurdle_width < 0:
+            hurdles.remove(hurdle)
+        if player.colliderect(hurdle):
+            running = False  # End game on collision
+
+    # Tool Logic
+    if current_time - last_tool_time > tool_spawn_rate:
+        tool_x = SCREEN_WIDTH
+        tool_y = random.randint(50, SCREEN_HEIGHT - 50)
+        tools.append(pygame.Rect(tool_x, tool_y, tool_size, tool_size))
+        last_tool_time = current_time
+
+    for tool in tools[:]:
+        tool.x -= tool_speed
+        if tool.x + tool_size < 0:
+            tools.remove(tool)
+        if player.colliderect(tool):
+            tools.remove(tool)
+            score += 10  # Increase score
+
+    # Draw Player
+    pygame.draw.rect(screen, BLUE, player)
+
+    # Draw Hurdles
+    for hurdle in hurdles:
+        pygame.draw.rect(screen, RED, hurdle)
+
+    # Draw Tools
+    for tool in tools:
+        pygame.draw.rect(screen, GREEN, tool)
+
+    # Draw Score
+    score_text = font.render(f"Score: {score}", True, BLACK)
+    screen.blit(score_text, (10, 10))
+
+    # Update Display
+    pygame.display.flip()
+
+    # Cap the Frame Rate
+    clock.tick(FPS)
+
+# Quit Pygame
+pygame.quit()

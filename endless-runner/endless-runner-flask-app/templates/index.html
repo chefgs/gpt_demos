@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Runner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Automation Runner</h1>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <p id="score">Score: 0</p>
+    <p id="gameOverMessage"></p>
+    <button id="startButton">Start Game</button>
+    <button id="restartButton" style="display:none;">Restart Game</button>
+
+    <script>
+        const socket = io();
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const gameOverMessage = document.getElementById('gameOverMessage');
+        const startButton = document.getElementById('startButton');
+        const restartButton = document.getElementById('restartButton');
+
+        startButton.addEventListener('click', () => {
+            socket.emit('start_game');
+            startButton.style.display = 'none';
+            restartButton.style.display = 'block';
+        });
+
+        restartButton.addEventListener('click', () => {
+            socket.emit('restart_game');
+            gameOverMessage.textContent = '';
+        });
+
+        socket.on('game_state', (gameState) => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Player
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(gameState.player.x, gameState.player.y, gameState.player.size, gameState.player.size);
+
+            // Draw Hurdles
+            ctx.fillStyle = 'red';
+            gameState.hurdles.forEach(hurdle => {
+                ctx.fillRect(hurdle.x, hurdle.y, hurdle.width, hurdle.height);
+            });
+
+            // Draw Tools
+            ctx.fillStyle = 'green';
+            gameState.tools.forEach(tool => {
+                ctx.fillRect(tool.x, tool.y, tool.size, tool.size);
+            });
+
+            // Update Score
+            scoreElement.textContent = `Score: ${gameState.score}`;
+        });
+
+        socket.on('game_over', (data) => {
+            gameOverMessage.textContent = data.message;
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                socket.emit('jump');
+            }
+            if (event.key === 'r') {
+                socket.emit('restart_game');
+                gameOverMessage.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>

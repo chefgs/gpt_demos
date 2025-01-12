@@ -51,6 +51,33 @@ last_tool_time = 0
 # Score
 score = 0
 
+def reset_game():
+    global player_y, player_y_velocity, hurdles, tools, score, last_hurdle_time, last_tool_time
+    player_y = SCREEN_HEIGHT - player_size - 20
+    player_y_velocity = 0
+    hurdles = []
+    tools = []
+    score = 0
+    last_hurdle_time = 0
+    last_tool_time = 0
+
+def game_over_screen():
+    screen.fill(WHITE)
+    game_over_text = font.render("Game Over! Press 'R' to Restart", True, BLACK)
+    screen.blit(game_over_text, (SCREEN_WIDTH // 2 - game_over_text.get_width() // 2, SCREEN_HEIGHT // 2 - game_over_text.get_height() // 2))
+    pygame.display.flip()
+
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_r:
+                    waiting = False
+                    reset_game()
+
 # Game Loop
 running = True
 while running:
@@ -83,7 +110,7 @@ while running:
         if hurdle.x + hurdle_width < 0:
             hurdles.remove(hurdle)
         if player.colliderect(hurdle):
-            running = False  # End game on collision
+            game_over_screen()
 
     # Tool Logic
     if current_time - last_tool_time > tool_spawn_rate:

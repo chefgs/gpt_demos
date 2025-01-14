@@ -113,7 +113,7 @@ while running:
     current_time = pygame.time.get_ticks()
     if current_time - last_hurdle_time > hurdle_spawn_rate:
         hurdle_x = SCREEN_WIDTH
-        hurdle_y = SCREEN_HEIGHT - hurdle_height - 20
+        hurdle_y = random.randint(50, SCREEN_HEIGHT - hurdle_height - 20)
         hurdles.append(pygame.Rect(hurdle_x, hurdle_y, hurdle_width, hurdle_height))
         last_hurdle_time = current_time
 
